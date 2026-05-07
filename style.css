@@ -1,0 +1,263 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #12002E;
+      --violet: #3B0FA0;
+      --purple: #6A1FD8;
+      --glow: #9B5CF6;
+      --soft: #C4A8F7;
+      --bg: #07001A;
+      --card: rgba(59,15,160,0.12);
+      --border: rgba(154,92,246,0.25);
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--bg);
+      font-family: 'DM Sans', sans-serif;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* ── Background ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%, rgba(106,31,216,.55) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 90% 80%, rgba(59,15,160,.4) 0%, transparent 60%),
+        radial-gradient(ellipse 40% 30% at 5% 70%, rgba(154,92,246,.2) 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: .6;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Logo ── */
+    .logo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      animation: fadeDown .7s ease both;
+    }
+
+    .logo-img {
+      width: 120px;
+      height: 120px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 28px rgba(154,92,246,.7));
+    }
+
+    .brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      letter-spacing: .12em;
+      background: linear-gradient(135deg, #fff 30%, var(--soft) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .tagline {
+      font-size: .82rem;
+      font-weight: 400;
+      color: rgba(196,168,247,.7);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-top: -10px;
+      text-align: center;
+      animation: fadeDown .9s ease both;
+    }
+
+    /* ── Divider ── */
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--glow), transparent);
+      margin: 28px 0 32px;
+      animation: fadeIn 1s ease both;
+    }
+
+    /* ── Buttons ── */
+    .links {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 17px 24px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      text-decoration: none;
+      color: #fff;
+      font-size: .95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+      overflow: hidden;
+      animation: fadeUp .6s ease both;
+    }
+
+    .btn:nth-child(1) { animation-delay: .1s; }
+    .btn:nth-child(2) { animation-delay: .18s; }
+    .btn:nth-child(3) { animation-delay: .26s; }
+    .btn:nth-child(4) { animation-delay: .34s; }
+    .btn:nth-child(5) { animation-delay: .42s; }
+
+    .btn::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(154,92,246,.18) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity .2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.012);
+      border-color: rgba(154,92,246,.55);
+      box-shadow: 0 8px 32px rgba(106,31,216,.35), 0 0 0 1px rgba(154,92,246,.15);
+    }
+
+    .btn:hover::before { opacity: 1; }
+
+    .btn:active { transform: scale(.98); }
+
+    /* CTA principal */
+    .btn.primary {
+      background: linear-gradient(135deg, var(--purple) 0%, var(--violet) 100%);
+      border-color: rgba(154,92,246,.5);
+      box-shadow: 0 4px 24px rgba(106,31,216,.4);
+    }
+
+    .btn.primary:hover {
+      box-shadow: 0 10px 40px rgba(106,31,216,.6), 0 0 0 1px rgba(154,92,246,.4);
+    }
+
+    /* Shine sweep */
+    .btn.primary::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -80%;
+      width: 60%;
+      height: 200%;
+      background: linear-gradient(100deg, transparent 30%, rgba(255,255,255,.12) 50%, transparent 70%);
+      transform: skewX(-15deg);
+      animation: shine 3.5s ease infinite;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 1.3rem;
+    }
+
+    .btn-text { flex: 1; }
+    .btn-label { display: block; font-size: .75rem; color: rgba(196,168,247,.6); font-weight: 400; margin-bottom: 1px; }
+    .btn-title { display: block; font-weight: 600; font-size: .98rem; }
+
+    .arrow {
+      color: rgba(196,168,247,.5);
+      font-size: 1rem;
+      transition: transform .2s, color .2s;
+    }
+    .btn:hover .arrow { transform: translateX(4px); color: var(--soft); }
+
+    /* Specific icon backgrounds */
+    .icon-wa  { background: rgba(37,211,102,.15); }
+    .icon-site { background: rgba(154,92,246,.2); }
+    .icon-ig  { background: rgba(225,48,108,.15); }
+    .icon-mail { background: rgba(59,130,246,.15); }
+    .icon-orcamento { background: rgba(255,200,50,.1); }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: 52px;
+      font-size: .72rem;
+      color: rgba(196,168,247,.3);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      animation: fadeIn 1.4s ease both;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+    @keyframes shine {
+      0%   { left: -80%; }
+      40%  { left: 120%; }
+      100% { left: 120%; }
+    }
+
+    /* Floating particles */
+    .particles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .p {
+      position: absolute;
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--glow);
+      opacity: 0;
+      animation: float linear infinite;
+    }
+    @keyframes float {
+      0%   { transform: translateY(100vh) scale(0); opacity: 0; }
+      10%  { opacity: .6; }
+      90%  { opacity: .3; }
+      100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+    }
